@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "main.h"
+//#include "chained_list.h"
 
 void my_memset(void *dest,size_t size, void *fill)
 {
@@ -57,12 +59,12 @@ bool check_block(int sudoku[9][9], int v, int h, int value)
         while (vl < 3)
         {
             if (sudoku[v + vl][h + hl] == value)
-                return false;
+                return true;
         vl++;
         }
     hl++;
     }
-    return true;
+    return false;
 }
 
 bool check_line(int sudoku[9][9], int v, int k)
@@ -73,23 +75,22 @@ bool check_line(int sudoku[9][9], int v, int k)
     while (i--)
     {
         if (sudoku[v][i] == k)
-            return false;
+            return true;
     }
-    return true;
+    return false;
 }
 
-bool check_colone(int sudoku[9][9], int h, int k)
+bool check_column(int sudoku[9][9], int h, int k)
 {
-    /* cette fonction compte le nombre de "value" sur toute la ligne et renvoi le résultat */
     int p;
 
     p = 9;
     while (p--)
     {
         if (sudoku[p][h] == k)
-            return false;
+            return true;
     }
-    return true;
+    return false;
 }
 
 int count_missing(int sudoku[9][9])
@@ -112,12 +113,12 @@ int count_missing(int sudoku[9][9])
     }
     return c;
 }
-bool check_all(int sudoku[9][9], int v, int h, int k)
+bool check_position(int sudoku[9][9], int v, int h, int k)
 {
-    if (check_line(sudoku, v, k)) return true;
-    if (check_colone(sudoku, h, k)) return true;
-    if (check_block(sudoku, v, h, k)) return true;
-    return false;
+    if (check_line(sudoku, v, k)) return false;
+    if (check_column(sudoku, h, k)) return false;
+    if (check_block(sudoku, v, h, k)) return false;
+    return true;
 }
 
 bool fill_grid(int sudoku[9][9], int position)
@@ -138,45 +139,79 @@ bool fill_grid(int sudoku[9][9], int position)
 
     if (position == 81)
         return true;
-    printf("pos: %i\n",position);
 
     if (sudoku[v][h])
         return fill_grid(sudoku,position+1);
 
     while (k <= 9)
     {
-        if (!check_all(sudoku, v, h, k))
+        if (check_position(sudoku, v, h, k))
         {
             sudoku[v][h] = k;
-            printf("confirmed -> %i:%i x:%i\n", v, h,sudoku[v][h]);
+            /* printf("confirmed -> %i:%i x:%i\n", v, h,sudoku[v][h]); */
             if (fill_grid(sudoku,position +1))
                 return true;
         }
         k++;
     }
-    printf("failed on %i:%i\n",v,h);
     sudoku[v][h] = 0;
     return false;
 }
 
-int main(void)
+void load_line(int sudoku[9][9], const char* line)
 {
-    /* sudoku contiens un array d'entier représentant les cases
-     * 0 = une case vide
-     * 1 à 9 une case pleine
-     *
-     * A A A B B B C C C
-     * A A A B B B C C C
-     * A A A B B B C C C
-     * D D D E E E F F F
-     * D D D E E E F F F
-     * D D D E E E F F F
-     * G G G H H H I I I
-     * G G G H H H I I I
-     * G G G H H H I I I
-     */
+    int pos;
+    int v;
+    int h;
 
-    //un bon vieux tableau à deux dimentions
+    pos = 0;
+    while (pos < 81)
+    {
+        v = pos / 9;
+        h = pos % 9;
+        sudoku[v][h] = line[pos] - 48;
+        pos++;
+    }
+}
+
+bool load_file(char* filepath, const int grid_num, int sudoku[9][9])
+{
+    (void) grid_num;
+    FILE* file;
+    char data[82];
+    int count;
+
+    count = 0;
+    file = fopen(filepath,"r");
+    while (fread(data,sizeof(char),82,file))
+    {
+        count++;
+        if (grid_num == count) {
+            load_line(sudoku,data);
+            return true;
+        }
+    }
+    fclose(file);
+    return false;
+}
+
+void grid_clear(int sudoku[9][9])
+{
+    int v;
+    int h;
+    int pos;
+
+    pos = 82;
+    while (pos--)
+    {
+        v = pos / 9;
+        h = pos % 9;
+        sudoku[v][h] = 0;
+    }
+}
+
+int main(int argc, char *argv[])
+{
     //sudoku[] = vertical
     //sudoku[][] = horizontal
     int missing;
@@ -192,6 +227,12 @@ int main(void)
         {3,0,4,0,9,0,5,0,0},
         {0,0,0,0,2,5,0,4,8}
     };
+    if (argc > 1)
+    {
+        printf("loading user grid\n");
+        grid_clear(sudoku);
+        load_line(sudoku,argv[1]);
+    }
 
     show_grid(sudoku);
     missing = count_missing(sudoku);
