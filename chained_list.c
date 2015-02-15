@@ -6,10 +6,13 @@ st_chained_item* list_append(st_chained_item* parent,const int value)
 {
     /*
      ** add a new item to a list, it's ok to use:
-     ** st_chained_item* = list_append(NULL,value)
+     ** st_chained_item* n = list_append(NULL,value)
      ** to get the first item of the list
      */
-    st_chained_item *n = malloc(sizeof(st_chained_item));
+    st_chained_item *n;
+
+    n = malloc(sizeof(st_chained_item));
+    if (!n) exit(1);
     n->next = NULL;
     n->value = value;
     parent->next = n;
@@ -32,6 +35,7 @@ int list_count(st_chained_item* first)
     }
     return count;
 }
+
 st_chained_item** list_index(st_chained_item* first)
 {
     st_chained_item *n;
@@ -43,7 +47,8 @@ st_chained_item** list_index(st_chained_item* first)
     size = list_count(first);
     n = first;
     list = malloc(sizeof(st_chained_item*) * (size +1));
-    if (!list) return NULL;
+    if (!list)
+        return NULL;
     while ((n = n->next))
     {
         list[pos] = n;
@@ -90,9 +95,9 @@ st_chained_item* list_last(st_chained_item *first)
     st_chained_item *n;
 
     n = first;
-    while (1)
+    while (n->next)
     {
-        if (!n->next) return n;
         n = n->next;
     }
+    return n;
 }
