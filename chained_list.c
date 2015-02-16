@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include "chained_list.h"
 
-st_chained_item* list_append(st_chained_item* parent,const int value)
+s_chained_item* list_append(s_chained_item* parent,const int value)
 {
     /*
      ** add a new item to a list, it's ok to use:
      ** st_chained_item* n = list_append(NULL,value)
      ** to get the first item of the list
      */
-    st_chained_item *n;
+    s_chained_item *n;
 
-    n = malloc(sizeof(st_chained_item));
+    n = malloc(sizeof(s_chained_item));
     if (!n) exit(1);
     n->next = NULL;
     n->value = value;
@@ -19,13 +19,13 @@ st_chained_item* list_append(st_chained_item* parent,const int value)
     return n;
 }
 
-int list_count(st_chained_item* first)
+int list_count(s_chained_item* first)
 {
     /*
      ** return the size of the chain
      */
     int count;
-    st_chained_item* n;
+    s_chained_item* n;
 
     count = 0;
     n = first;
@@ -36,17 +36,17 @@ int list_count(st_chained_item* first)
     return count;
 }
 
-st_chained_item** list_index(st_chained_item* first)
+s_chained_item** list_index(s_chained_item *first)
 {
-    st_chained_item *n;
-    st_chained_item **list;
+    s_chained_item *n;
+    s_chained_item **list;
     int size;
     int pos;
 
     pos = 0;
     size = list_count(first);
     n = first;
-    list = malloc(sizeof(st_chained_item*) * (size +1));
+    list = malloc(sizeof(s_chained_item*) * (size +1));
     if (!list)
         return NULL;
     while ((n = n->next))
@@ -58,14 +58,14 @@ st_chained_item** list_index(st_chained_item* first)
     return list;
 }
 
-void list_free(st_chained_item* first)
+void list_free(s_chained_item* first)
 {
     /*
      ** this function free the entire chain list
      */
     int pos;
-    st_chained_item **list;
-    st_chained_item *n;
+    s_chained_item **list;
+    s_chained_item *n;
 
     pos = 0;
     list = list_index(first);
@@ -76,9 +76,9 @@ void list_free(st_chained_item* first)
     free(list);
 }
 
-void list_show(st_chained_item *first)
+void list_show(s_chained_item *first)
 {
-    st_chained_item *n;
+    s_chained_item *n;
     int count;
 
     count = 0;
@@ -90,9 +90,9 @@ void list_show(st_chained_item *first)
         n = n->next;
     }
 }
-st_chained_item* list_last(st_chained_item *first)
+s_chained_item* list_last(s_chained_item *first)
 {
-    st_chained_item *n;
+    s_chained_item *n;
 
     n = first;
     while (n->next)
