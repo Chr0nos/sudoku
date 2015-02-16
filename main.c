@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "main.h"
-//#include "chained_list.h"
+#include "chained_list.h"
 
 void my_memset(void *dest,size_t size, void *fill)
 {
@@ -10,14 +10,26 @@ void my_memset(void *dest,size_t size, void *fill)
     while (size--)
         *d = *f;
 }
+int my_strlen(const char* string)
+{
+    int len;
+
+    len = 0;
+    while (string[len])
+    {
+        len++;
+    }
+    return 0;
+}
+
 void show_grid(int sudoku[9][9])
 {
     int h;
     int v;
-    int colone;
+    int column;
     int x;
 
-    colone = 2;
+    column = 2;
     x = 2;
     v = 0;
     printf("\n");
@@ -27,9 +39,9 @@ void show_grid(int sudoku[9][9])
         while (h < 9)
         {
             printf("%i ", sudoku[v][h]);
-            if (!colone--)
+            if (!column--)
             {
-                colone = 2;
+                column = 2;
                 printf("  ");
             }
             h++;
@@ -163,9 +175,12 @@ void load_line(int sudoku[9][9], const char* line)
     int pos;
     int v;
     int h;
+    int len;
 
     pos = 0;
-    while (pos < 81)
+    len = my_strlen(line);
+    if (len > 81) len = 81;
+    while (pos < len)
     {
         v = pos / 9;
         h = pos % 9;
