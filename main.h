@@ -3,8 +3,6 @@
 #define MAIN
 
 int main(int argc, char *argv[]);
-void my_memset(void *dest,size_t size, void *fill);
-int my_strlen(const char* string);
 void show_grid(int sudoku[9][9]);
 bool check_block(int sudoku[9][9], int v, int h, int value);
 bool check_line(int sudoku[9][9], int v, int k);

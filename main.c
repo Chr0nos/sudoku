@@ -1,26 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "main.h"
+#include "my_strlen.h"
 #include "chained_list.h"
-
-void my_memset(void *dest,size_t size, void *fill)
-{
-    char *d = (char*) dest;
-    char *f = (char*) fill;
-    while (size--)
-        *d = *f;
-}
-int my_strlen(const char* string)
-{
-    int len;
-
-    len = 0;
-    while (string[len])
-    {
-        len++;
-    }
-    return 0;
-}
 
 void show_grid(int sudoku[9][9])
 {
@@ -191,7 +173,6 @@ void load_line(int sudoku[9][9], const char* line)
 
 bool load_file(char* filepath, const int grid_num, int sudoku[9][9])
 {
-    (void) grid_num;
     FILE* file;
     char data[82];
     int count;
@@ -201,7 +182,8 @@ bool load_file(char* filepath, const int grid_num, int sudoku[9][9])
     while (fread(data,sizeof(char),82,file))
     {
         count++;
-        if (grid_num == count) {
+        if (grid_num == count)
+        {
             load_line(sudoku,data);
             return true;
         }
@@ -227,28 +209,22 @@ void grid_clear(int sudoku[9][9])
 
 int main(int argc, char *argv[])
 {
-    //sudoku[] = vertical
-    //sudoku[][] = horizontal
+    /*
+    ** sudoku[] = vertical
+    ** sudoku[][] = horizontal
+    */
     int missing;
+    int sudoku[9][9];
 
-    int sudoku[9][9] = {
-        {7,8,0,3,6,0,0,0,0},
-        {0,0,6,0,1,0,9,0,2},
-        {0,0,3,4,0,2,6,0,7},
-        {8,0,9,5,0,4,2,0,1},
-        {0,6,0,9,0,1,0,7,0},
-        {1,0,7,2,0,6,8,0,5},
-        {5,0,8,6,0,3,7,0,0},
-        {3,0,4,0,9,0,5,0,0},
-        {0,0,0,0,2,5,0,4,8}
-    };
     if (argc > 1)
     {
         printf("loading user grid\n");
         grid_clear(sudoku);
         load_line(sudoku,argv[1]);
     }
-
+    else {
+        load_line(sudoku,"780360000006010902003402607809504201060901070107206805508603700304090500000025048");
+    }
     show_grid(sudoku);
     missing = count_missing(sudoku);
     printf("missing: %i\n",missing);
