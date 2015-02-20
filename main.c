@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "main.h"
 #include "my_strlen.h"
+#include "my_printf.h"
 #include "chained_list.h"
 #include "check_grid.h"
 
@@ -219,12 +220,12 @@ int main(int argc, char *argv[])
 
     if (argc > 1)
     {
-        printf("loading user grid\n");
+        my_printf("loading user grid\n");
         grid_clear(sudoku);
         load_line(sudoku,argv[1]);
         if (!check_grid(sudoku))
         {
-            printf("invalid user grid\n");
+            my_printf("invalid user grid\n");
             exit(0);
         }
     }
