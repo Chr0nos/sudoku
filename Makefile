@@ -1,11 +1,11 @@
 CC=gcc
-CFLAGS=-W -Wall -ansi -pedantic
+CFLAGS=-W -Wall -ansi -pedantic -O2
 LDFLAGS=
 EXEC=SudokuFinisher
 
 all: $(EXEC)
 
-SudokuFinisher: my_strlen.o my_printf.o chained_list.o main.o
+SudokuFinisher: my_strlen.o my_printf.o chained_list.o check_grid.o main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c

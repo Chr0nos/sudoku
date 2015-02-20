@@ -3,6 +3,7 @@
 #include "main.h"
 #include "my_strlen.h"
 #include "chained_list.h"
+#include "check_grid.h"
 
 void show_grid(int sudoku[9][9])
 {
@@ -221,6 +222,11 @@ int main(int argc, char *argv[])
         printf("loading user grid\n");
         grid_clear(sudoku);
         load_line(sudoku,argv[1]);
+        if (!check_grid(sudoku))
+        {
+            printf("invalid user grid\n");
+            exit(0);
+        }
     }
     else {
         load_line(sudoku,"780360000006010902003402607809504201060901070107206805508603700304090500000025048");
