@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-W -Wall -ansi -pedantic -O2
+CFLAGS=-W -Wall -ansi -pedantic -O2 -ggdb -pipe
 LDFLAGS=
 EXEC=SudokuFinisher
 

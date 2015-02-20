@@ -18,7 +18,9 @@ void my_printf(const char* string)
 void my_printf(const char* string)
 {
     int size;
+    int result;
 
     size = my_strlen(string);
-    write(STDOUT_FILENO, string, size);
+    result = write(STDOUT_FILENO, string, size);
+    (void) result;
 }
