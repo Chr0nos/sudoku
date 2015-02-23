@@ -16,7 +16,7 @@ void show_grid(int sudoku[9][9])
     column = 2;
     x = 2;
     v = 0;
-    printf("\n");
+    my_printf("\n");
     while (v < 9)
     {
         h = 0;
@@ -38,7 +38,7 @@ void show_grid(int sudoku[9][9])
         }
         v++;
     }
-    printf("#####################\n");
+    my_printf("#####################\n");
 }
 
 bool check_block(int sudoku[9][9], int v, int h, int value)
@@ -230,6 +230,7 @@ int main(int argc, char *argv[])
         }
     }
     else {
+        my_printf("loading default grid\n");
         load_line(sudoku,"780360000006010902003402607809504201060901070107206805508603700304090500000025048");
     }
     show_grid(sudoku);
@@ -240,7 +241,7 @@ int main(int argc, char *argv[])
 
     show_grid(sudoku);
     missing = count_missing(sudoku);
-    printf("missing: %i\n",missing);
+    my_printf("missing: %i\n",missing);
     return 0;
 }
 

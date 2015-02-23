@@ -7,7 +7,9 @@ SOURCES += main.c \
     chained_list.c \
     my_printf.c \
     my_strlen.c \
-    check_grid.c
+    check_grid.c \
+    my_atoi.c \
+    my_itoa.c
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -17,5 +19,7 @@ HEADERS += \
     chained_list.h \
     my_strlen.h \
     my_printf.h \
-    check_grid.h
+    check_grid.h \
+    my_atoi.h \
+    my_itoa.h
 

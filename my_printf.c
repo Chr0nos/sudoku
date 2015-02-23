@@ -1,31 +1,53 @@
 #include <unistd.h>
+#include <stdarg.h>
+#include "my_itoa.h"
+#include "my_strlen.h"
 
-char my_printf_replace_ascii(char *x)
+void my_printf_vars(va_list *args,char *x, int *i, const char* string)
 {
-    if (*x == 'n') return 10;
-    else if (*x == 'r') return 13;
-    else if (*x == '\\') return '\\';
-    return *x;
+    char *s;
+    int result;
+    int v;
+
+    *x = string[++*i];
+    if (*x == 's')
+    {
+       s = va_arg(*args,char *);
+       while (*s != '\0')
+       {
+           result = write(STDOUT_FILENO,s,1);
+            s++;
+       }
+    }
+    else if (*x == 'i')
+    {
+        v = va_arg(*args,int);
+        s = my_itoa(v);
+        result = write(STDOUT_FILENO,s,my_strlen(s));
+    }
+    *x = string[++*i];
+    (void) result;
 }
 
-void my_printf(const char* string)
+void my_printf(const char* string, ...)
 {
     int i;
     int result;
     char x;
+    va_list args;
 
+    va_start(args,string);
     i = 0;
-    while (string[i])
+    while (string[i] != '\0')
     {
         x = string[i];
-        if (x == '\\')
+        if (x == '%')
         {
-            x = string[i+1];
-            x = my_printf_replace_ascii(&x);
-            i++;
+            my_printf_vars(&args,&x,&i,string);
         }
-        result = write(STDOUT_FILENO,(const void*) &x,1);
+        result = write(STDOUT_FILENO,&x,1);
         (void) result;
         i++;
     }
+    va_end(args);
 }

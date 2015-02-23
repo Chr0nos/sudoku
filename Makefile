@@ -5,7 +5,7 @@ EXEC=SudokuFinisher
 
 all: $(EXEC)
 
-SudokuFinisher: my_strlen.o my_printf.o chained_list.o check_grid.o main.o
+SudokuFinisher: my_strlen.o my_atoi.o my_itoa.o my_printf.o chained_list.o check_grid.o main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
