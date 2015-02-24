@@ -5,6 +5,7 @@
 #include "my_printf.h"
 #include "chained_list.h"
 #include "check_grid.h"
+#include "my_itoa.h"
 
 void show_grid(int sudoku[9][9])
 {
@@ -235,7 +236,7 @@ int main(int argc, char *argv[])
     }
     show_grid(sudoku);
     missing = count_missing(sudoku);
-    printf("missing: %i\n",missing);
+    my_printf("missing: %i\n",missing);
 
     fill_grid(sudoku,0);
 

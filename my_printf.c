@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdarg.h>
 #include "my_itoa.h"
 #include "my_strlen.h"
@@ -22,8 +23,11 @@ void my_printf_vars(va_list *args,char *x, int *i, const char* string)
     else if (*x == 'i')
     {
         v = va_arg(*args,int);
-        s = my_itoa(v);
+        s = malloc(sizeof(char) * 8 + 2);
+        my_itoa(v,s);
         result = write(STDOUT_FILENO,s,my_strlen(s));
+        free(s);
+        s = NULL;
     }
     *x = string[++*i];
     (void) result;

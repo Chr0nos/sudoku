@@ -1,7 +1,7 @@
 #ifndef MY_ITOA
 #define MY_ITOA
 
-char* my_itoa(int value);
+void my_itoa(int value,char *dest);
 
 #endif
 
