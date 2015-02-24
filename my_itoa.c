@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "my_strrev.h"
 
 void my_itoa(int value, char *s)
