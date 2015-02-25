@@ -23,19 +23,19 @@ void show_grid(int sudoku[9][9])
         h = 0;
         while (h < 9)
         {
-            printf("%i ", sudoku[v][h]);
+            my_printf("%i ", sudoku[v][h]);
             if (!column--)
             {
                 column = 2;
-                printf("  ");
+                my_printf("  ");
             }
             h++;
         }
-        printf("\n");
+        my_printf("\n");
         if (!x--)
         {
             x = 2;
-            printf("\n");
+            my_printf("\n");
         }
         v++;
     }
