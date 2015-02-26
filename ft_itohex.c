@@ -10,9 +10,14 @@ void ft_itohex(int value, char* s)
     i = 0;
     while (value)
     {
-        value /= 16;
         k = value % 16;
         s[i] = keys[k];
+        value /= 16;
+        i++;
+    }
+    if (i % 2 > 0)
+    {
+        s[i] = keys[0];
         i++;
     }
     s[i] = '\0';
