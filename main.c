@@ -219,6 +219,7 @@ int main(int argc, char *argv[])
     int missing;
     int sudoku[9][9];
 
+    my_printf("my test: %x\n",1000);
     if (argc > 1)
     {
         my_printf("loading user grid\n");

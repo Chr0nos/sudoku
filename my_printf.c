@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include "my_itoa.h"
 #include "my_strlen.h"
+#include "ft_itohex.h"
 
 void my_printf_vars(va_list *args,char *x, int *i, const char* string)
 {
@@ -28,6 +29,14 @@ void my_printf_vars(va_list *args,char *x, int *i, const char* string)
         result = write(STDOUT_FILENO,s,my_strlen(s));
         free(s);
         s = NULL;
+    }
+    else if (*x == 'x')
+    {
+        v = va_arg(*args,int);
+        s = malloc(sizeof(char) * 255);
+        ft_itohex(v,s);
+        result = write(STDOUT_FILENO,s,my_strlen(s));
+        free(s);
     }
     *x = string[++*i];
     (void) result;

@@ -11,7 +11,9 @@ SOURCES += main.c \
     my_atoi.c \
     my_itoa.c \
     my_strrev.c \
-    my_memset.c
+    my_memset.c \
+    ft_itohex.c \
+    ft_memcpy.c
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -25,5 +27,7 @@ HEADERS += \
     my_atoi.h \
     my_itoa.h \
     my_strrev.h \
-    my_memset.h
+    my_memset.h \
+    ft_itohex.h \
+    ft_memcpy.h
 
