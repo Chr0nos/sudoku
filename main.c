@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "main.h"
-#include "my_strlen.h"
-#include "my_printf.h"
+#include "ft_strlen.h"
+#include "ft_printf.h"
 #include "chained_list.h"
 #include "check_grid.h"
-#include "my_itoa.h"
 
 void show_grid(int sudoku[9][9])
 {
@@ -17,29 +16,29 @@ void show_grid(int sudoku[9][9])
     column = 2;
     x = 2;
     v = 0;
-    my_printf("\n");
+    ft_printf("\n");
     while (v < 9)
     {
         h = 0;
         while (h < 9)
         {
-            my_printf("%i ", sudoku[v][h]);
+            ft_printf("%i ", sudoku[v][h]);
             if (!column--)
             {
                 column = 2;
-                my_printf("  ");
+                ft_printf("  ");
             }
             h++;
         }
-        my_printf("\n");
+        ft_printf("\n");
         if (!x--)
         {
             x = 2;
-            my_printf("\n");
+            ft_printf("\n");
         }
         v++;
     }
-    my_printf("#####################\n");
+    ft_printf("#####################\n");
 }
 
 bool check_block(int sudoku[9][9], int v, int h, int value)
@@ -163,7 +162,7 @@ void load_line(int sudoku[9][9], const char* line)
     int len;
 
     pos = 0;
-    len = my_strlen(line);
+    len = ft_strlen(line);
     if (len > 81) len = 81;
     while (pos < len)
     {
@@ -219,31 +218,31 @@ int main(int argc, char *argv[])
     int missing;
     int sudoku[9][9];
 
-    my_printf("my test: %x\n",1000);
+    ft_printf("my test: %x\n",1000);
     if (argc > 1)
     {
-        my_printf("loading user grid\n");
+        ft_printf("loading user grid\n");
         grid_clear(sudoku);
         load_line(sudoku,argv[1]);
         if (!check_grid(sudoku))
         {
-            my_printf("invalid user grid\n");
+            ft_printf("invalid user grid\n");
             exit(0);
         }
     }
     else {
-        my_printf("loading default grid\n");
+        ft_printf("loading default grid\n");
         load_line(sudoku,"780360000006010902003402607809504201060901070107206805508603700304090500000025048");
     }
     show_grid(sudoku);
     missing = count_missing(sudoku);
-    my_printf("missing: %i\n",missing);
+    ft_printf("missing: %i\n",missing);
 
     fill_grid(sudoku,0);
 
     show_grid(sudoku);
     missing = count_missing(sudoku);
-    my_printf("missing: %i\n",missing);
+    ft_printf("missing: %i\n",missing);
     return 0;
 }
 

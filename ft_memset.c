@@ -1,4 +1,4 @@
-void *my_memset(void *s, int c, unsigned long size) {
+void *ft_memset(void *s, int c, unsigned long size) {
     char *x;
     unsigned long pos;
 

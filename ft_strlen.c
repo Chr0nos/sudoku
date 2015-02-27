@@ -1,4 +1,4 @@
-int my_strlen(const char *string)
+int ft_strlen(const char *string)
 {
     int size;
 

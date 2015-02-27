@@ -1,5 +1,5 @@
 #include "ft_strcpy.h"
-#include "my_strrev.h"
+#include "ft_strrev.h"
 
 void ft_itohex(int value, char* s)
 {
@@ -21,5 +21,5 @@ void ft_itohex(int value, char* s)
         i++;
     }
     s[i] = '\0';
-    my_strrev(s);
+    ft_strrev(s);
 }

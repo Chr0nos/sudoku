@@ -1,13 +1,13 @@
-#include "my_strlen.h"
+#include "ft_strlen.h"
 
-void my_strrev(char *s)
+void ft_strrev(char *s)
 {
     int i;
     int j;
     char x;
 
     i = 0;
-    j = my_strlen(s) -1;
+    j = ft_strlen(s) -1;
     while (i < j)
     {
         x = s[i];
