@@ -48,6 +48,14 @@ void ft_printf_vars(va_list *args,char *x, int *i, const char* string)
         result = write(STDOUT_FILENO, s, ft_strlen(s));
         free(s);
     }
+    else if (*x == 'b')
+    {
+        v = va_arg(*args,int);
+        s = malloc(sizeof(char) * 256);
+        ft_itobase(v, s, 2);
+        result = write(STDOUT_FILENO, s, ft_strlen(s));
+        free(s);
+    }
     *i += 1;
     *x = string[*i];
     (void) result;

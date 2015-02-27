@@ -9,7 +9,7 @@ EXEC=SudokuFinisher
 
 all: $(EXEC)
 
-SudokuFinisher: ft_strcpy.o ft_memcpy.o ft_itohex.o ft_memset.o ft_strlen.o ft_strrev.o ft_atoi.o ft_itoa.o ft_printf.o chained_list.o check_grid.o main.o
+SudokuFinisher: ft_calloc.o ft_strcpy.o ft_memcpy.o ft_itohex.o ft_memset.o ft_strlen.o ft_strrev.o ft_atoi.o ft_itoa.o ft_printf.o chained_list.o check_grid.o main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
