@@ -5,13 +5,13 @@ CONFIG -= qt
 
 SOURCES += main.c \
     chained_list.c \
-    my_printf.c \
-    my_strlen.c \
+    ft_printf.c \
+    ft_strlen.c \
     check_grid.c \
-    my_atoi.c \
-    my_itoa.c \
-    my_strrev.c \
-    my_memset.c \
+    ft_atoi.c \
+    ft_itoa.c \
+    ft_strrev.c \
+    ft_memset.c \
     ft_itohex.c \
     ft_memcpy.c
 
@@ -21,13 +21,13 @@ qtcAddDeployment()
 HEADERS += \
     main.h \
     chained_list.h \
-    my_strlen.h \
-    my_printf.h \
+    ft_strlen.h \
+    ft_printf.h \
     check_grid.h \
-    my_atoi.h \
-    my_itoa.h \
-    my_strrev.h \
-    my_memset.h \
+    ft_atoi.h \
+    ft_itoa.h \
+    ft_strrev.h \
+    ft_memset.h \
     ft_itohex.h \
     ft_memcpy.h
 

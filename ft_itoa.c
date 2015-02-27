@@ -2,6 +2,11 @@
 
 void ft_itoa(int value, char *s)
 {
+    /*
+    ** this function convert a number into a char* string
+    ** the number can be positive or negative
+    ** you need to allocate memory by yourself before calling this
+    */
     int i;
     short negative;
 
@@ -25,10 +30,24 @@ void ft_itoa(int value, char *s)
 
 void ft_itobase(int value, char* s, const int base)
 {
+    /*
+    ** this function convert a number into an other base
+    ** and put the result in *s
+    ** dont use a base lower than 2 or the function will set an empty string
+    ** valid bases range are: 2 - 62
+    ** you have to allocate memory by yourself before calling this
+    ** this function cannot convert negative numbers
+    */
     int i;
     int k;
-    const char* keys = "0123456789abcdef";
+    const char* keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWYXZ";
 
+    if (!s) return;
+    if (base < 2)
+    {
+        *s[0] = '\0';
+        return;
+    }
     i = 0;
     while (value)
     {
