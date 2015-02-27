@@ -28,7 +28,7 @@ void ft_itoa(int value, char *s)
     ft_strrev(s);
 }
 
-void ft_itobase(int value, char* s, const int base)
+void ft_itobase(unsigned int value, char* s, const unsigned int base)
 {
     /*
     ** this function convert a number into an other base
@@ -39,13 +39,13 @@ void ft_itobase(int value, char* s, const int base)
     ** this function cannot convert negative numbers
     */
     int i;
-    int k;
+    unsigned int k;
     const char* keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWYXZ";
 
     if (!s) return;
     if (base < 2)
     {
-        *s[0] = '\0';
+        s[0] = '\0';
         return;
     }
     i = 0;
