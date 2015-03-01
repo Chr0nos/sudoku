@@ -43,10 +43,8 @@ void ft_printf_vars(va_list *args, char *x, int *i, const char* string)
     {
         v = va_arg(*args, int);
         s = malloc(sizeof(char) * 256);
-        if (*x == 'x')
-			ft_itobase(v, s, 16);
-		else
-			ft_itobase(v, s, 2);
+        if (*x == 'x') ft_itobase(v, s, 16);
+        else ft_itobase(v, s, 2);
         ft_printf_string(s);
         free(s);
     }
