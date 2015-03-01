@@ -1,8 +1,7 @@
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include "ft_itoa.h"
-#include "ft_strlen.h"
 
 void ft_printf_string(const char *string)
 {
@@ -12,13 +11,13 @@ void ft_printf_string(const char *string)
     i = 0;
     while (string[i] != '\0')
     {
-        result = write(STDOUT_FILENO,(void*) &string[i],1);
+        result = putchar(string[i]);
         i++;
     }
     (void) result;
 }
 
-void ft_printf_vars(va_list *args,char *x, int *i, const char* string)
+void ft_printf_vars(va_list *args, char *x, int *i, const char* string)
 {
     char *s;
     int result;
@@ -33,27 +32,22 @@ void ft_printf_vars(va_list *args,char *x, int *i, const char* string)
     }
     else if (*x == 'i')
     {
-        v = va_arg(*args,int);
+        v = va_arg(*args, int);
         s = malloc(sizeof(char) * 8 + 2);
         ft_itoa(v, s);
-        result = write(STDOUT_FILENO, s, ft_strlen(s));
+        ft_printf_string(s);
         free(s);
         s = NULL;
     }
-    else if (*x == 'x')
+    else if ((*x == 'x') || (*x == 'b'))
     {
-        v = va_arg(*args,int);
+        v = va_arg(*args, int);
         s = malloc(sizeof(char) * 256);
-        ft_itobase(v, s, 16);
-        result = write(STDOUT_FILENO, s, ft_strlen(s));
-        free(s);
-    }
-    else if (*x == 'b')
-    {
-        v = va_arg(*args,int);
-        s = malloc(sizeof(char) * 256);
-        ft_itobase(v, s, 2);
-        result = write(STDOUT_FILENO, s, ft_strlen(s));
+        if (*x == 'x')
+			ft_itobase(v, s, 16);
+		else
+			ft_itobase(v, s, 2);
+        ft_printf_string(s);
         free(s);
     }
     *i += 1;
@@ -77,7 +71,7 @@ void ft_printf(const char* string, ...)
         {
             ft_printf_vars(&args, &x, &i, string);
         }
-        result = write(STDOUT_FILENO, &x, 1);
+        result = putchar(string[i]);
         (void) result;
         i++;
     }
