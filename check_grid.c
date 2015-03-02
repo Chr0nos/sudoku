@@ -66,6 +66,7 @@ bool check_grid(int sudoku[9][9])
         v = position / 9;
         h = position % 9;
         k = 0;
+        if (sudoku[v][h] > 9) return false;
         while (k++ < 9)
         {
             if (count_key_line(sudoku, v, k) > 1) return false;

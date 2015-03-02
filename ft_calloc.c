@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "ft_memset.h"
 
 void *ft_calloc(unsigned int size)
 {
@@ -6,11 +7,6 @@ void *ft_calloc(unsigned int size)
 
     d = malloc(size);
     if (!d) return NULL;
-    while (size)
-    {
-        d[size] = 0;
-        size--;
-    }
-    return d;
+    return ft_memset(d, 0, size);
 }
 

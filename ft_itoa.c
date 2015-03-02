@@ -56,12 +56,6 @@ void ft_itobase(unsigned int value, char* s, const unsigned int base)
         value /= base;
         i++;
     }
-    if (i % 2 > 0)
-    {
-        s[i] = keys[0];
-        i++;
-    }
     s[i] = '\0';
     ft_strrev(s);
 }
-
