@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "chained_list.h"
+#include "ft_printf.h"
 
-s_chained_item* list_append(s_chained_item* parent,const int value)
+s_chained_item* list_append(s_chained_item* parent, const int value)
 {
     /*
      ** add a new item to a list, it's ok to use:
@@ -29,8 +30,9 @@ int list_count(s_chained_item* first)
 
     count = 0;
     n = first;
-    while ((n = n->next))
+    while (n->next)
     {
+        n = n->next;
         count++;
     }
     return count;
@@ -49,10 +51,11 @@ s_chained_item** list_index(s_chained_item *first)
     list = malloc(sizeof(s_chained_item*) * (size +1));
     if (!list)
         return NULL;
-    while ((n = n->next))
+    while (n->next)
     {
         list[pos] = n;
         pos++;
+        n = n->next;
     }
     list[pos] = NULL;
     return list;
@@ -63,17 +66,16 @@ void list_free(s_chained_item* first)
     /*
      ** this function free the entire chain list
      */
-    int pos;
-    s_chained_item **list;
     s_chained_item *n;
+    s_chained_item *next;
 
-    pos = 0;
-    list = list_index(first);
-    while ((n = list[pos++]))
+    n = first;
+    while (n)
     {
+        next = n->next;
         free(n);
+        n = next;
     }
-    free(list);
 }
 
 void list_show(s_chained_item *first)
@@ -83,11 +85,11 @@ void list_show(s_chained_item *first)
 
     count = 0;
     n = first;
-    while (1)
+    while (n->next)
     {
-        if (!n) return;
-        printf("%i: %i\n",count++,n->value);
+        ft_printf("%i: %i\n", count, n->value);
         n = n->next;
+        count++;
     }
 }
 s_chained_item* list_last(s_chained_item *first)
@@ -100,4 +102,19 @@ s_chained_item* list_last(s_chained_item *first)
         n = n->next;
     }
     return n;
+}
+
+s_chained_item* ft_list_get_parent(s_chained_item *item)
+{
+    s_chained_item *n;
+    s_chained_item *s;
+
+    s = item;
+    n = item;
+    while (n->next)
+    {
+        if (s == n->next) return n;
+        n = n->next;
+    }
+    return NULL;
 }
