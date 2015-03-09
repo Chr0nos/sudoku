@@ -1,15 +1,19 @@
+#include "ft_strlen.h"
+#include "ft_pow.h"
+
 int ft_atoi(const char* string)
 {
     int pos;
     int result;
-    char cint;
+    int len;
 
     pos = 0;
     result = 0;
-    while (string[pos++] != '\0')
+    len = ft_strlen(string);
+    while (string[pos] != '\0')
     {
-        cint = string[pos] - '0';
-        result += cint * ((pos -1) * 10);
+        result += (string[pos] - '0') * ft_pow(10, len - pos -1);
+        pos++;
     }
-    return pos;
+    return result;
 }
