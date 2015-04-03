@@ -5,7 +5,7 @@
 typedef struct s_chained_item s_chained_item;
 struct s_chained_item
 {
-    unsigned short value;
+    int value;
     s_chained_item *next;
 };
 s_chained_item* append(s_chained_item* parent,const int value);

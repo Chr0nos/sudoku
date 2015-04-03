@@ -3,8 +3,11 @@
 #include "main.h"
 #include "ft_strlen.h"
 #include "ft_printf.h"
-#include "chained_list.h"
+#include "chained_list/chained_list.h"
 #include "check_grid.h"
+
+#include "ft_basetoi.h"
+#include "ft_pow.h"
 
 void show_grid(int sudoku[9][9])
 {
@@ -218,7 +221,6 @@ int main(int argc, char *argv[])
     int missing;
     int sudoku[9][9];
 
-    ft_printf("my test: %x\n",1000);
     if (argc > 1)
     {
         ft_printf("loading user grid\n");
@@ -226,6 +228,7 @@ int main(int argc, char *argv[])
         load_line(sudoku,argv[1]);
         if (!check_grid(sudoku))
         {
+            show_grid(sudoku);
             ft_printf("invalid user grid\n");
             exit(0);
         }

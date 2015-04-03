@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "chained_list.h"
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 s_chained_item* list_append(s_chained_item* parent, const int value)
 {
@@ -13,7 +13,11 @@ s_chained_item* list_append(s_chained_item* parent, const int value)
     s_chained_item *n;
 
     n = malloc(sizeof(s_chained_item));
-    if (!n) exit(1);
+    if (!n)
+    {
+        ft_printf_string("cannot allocate memory for list_append: exiting\n");
+        exit(1);
+    }
     n->next = NULL;
     n->value = value;
     parent->next = n;
@@ -94,6 +98,11 @@ void list_show(s_chained_item *first)
 }
 s_chained_item* list_last(s_chained_item *first)
 {
+    /*
+    ** return the last item of a chained list
+    ** "first" dont need to be the real first item, it just need
+    ** to be an item of the list
+    */
     s_chained_item *n;
 
     n = first;
@@ -106,6 +115,10 @@ s_chained_item* list_last(s_chained_item *first)
 
 s_chained_item* ft_list_get_parent(s_chained_item *item)
 {
+    /*
+    ** return the parent of item
+    ** if "item" has no parent: NULL will be returned
+    */
     s_chained_item *n;
     s_chained_item *s;
 
