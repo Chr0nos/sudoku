@@ -233,7 +233,8 @@ int main(int argc, char *argv[])
             exit(0);
         }
     }
-    else {
+    else
+    {
         ft_printf("loading default grid\n");
         load_line(sudoku,"780360000006010902003402607809504201060901070107206805508603700304090500000025048");
     }
